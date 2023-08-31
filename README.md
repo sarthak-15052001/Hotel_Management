@@ -17,3 +17,10 @@ Description:- -> This project contains two dashboard one is for hotel and second
 
 -> First intall the requirements file in your newly created virtual environment.
 -> Then do makemigration and migrate and after that create super user to run admin panel.
+
+
+
+# This is the video of this project and if u want to listen voice then use earphones.
+
+https://github.com/sarthak-15052001/Hotel_Management/assets/135957525/f42c0ac7-5b8d-412b-a280-0464c0160650
+
