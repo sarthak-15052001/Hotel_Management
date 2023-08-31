@@ -1,0 +1,97 @@
+{% extends 'hotel/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block title %} Booking Invoice Page {% endblock %}
+{% block content %}
+<div class="back_re">
+    <div class="container mt-5">
+       <div class="row">
+          <div class="col-md-12">
+             <div class="title">
+                <h2>Booking Invoice List</h2>
+             </div>
+          </div>
+       </div>
+    </div>
+ </div>
+ <div class="row">
+    <div class="col-sm-12">
+        <div class="card mt-5 mx-5">    
+            <div class="card-body">
+                <div class="table-responsive">
+                    <strong><font face="Arial" size="5" color="black"><center><caption>Booking And Room Details:-</caption></center></font></strong>
+                    <table class="table table-bordered" style="width:100%">
+                        {% for invoice in object_list %}
+                        <tbody>
+                            {% comment %} <tr>
+                                <b><font size="30"><caption>Booking Details</caption></b></font>
+                                </tr> {% endcomment %}
+                                <tr>
+                                    <th>Invoice Number:</th>
+                                    <td>{{invoice.order_id}}</td>
+                                    <th>Created On:</th>
+                                    <td>{{invoice.made_on}}</td>
+                                    <th>Booking Id:</th>
+                                    <td>{{invoice.booking.id}}</td>
+                                    <th>Customer Name:</th>
+                                    <td>{{invoice.user.first_name}} {{invoice.user.last_name}}</td>
+                                </tr>
+
+                                <tr>
+                                    <th>Email:</th>
+                                    <td>{{invoice.user.email}}</td>
+                                    <th>Contact:</th>
+                                    <td>{{invoice.user.phone_no}}</td>
+                                    <th>Check In:</th>
+                                    <td>{{invoice.booking.check_in}}</td>
+                                    <th>Check Out:</th>
+                                    <td>{{invoice.booking.check_out}}</td>
+                                </tr>
+        
+                                <tr>
+                                    <th>Booking Status:</th>
+                                    <td>{{invoice.booking.booking_status}}</td>
+                                    <th>Total Days:</th>
+                                    <td>{{invoice.booking.total_days}}</td>
+                                    <th>Total Members:</th>
+                                    <td>{{invoice.booking.total_members}}</td>
+                                    <th>No Of Rooms:</th>
+                                    <td>{{invoice.booking.no_of_room}}</td>
+                                </tr>
+                                
+                                <tr>
+                                    <th></th>
+                                </tr>
+                                
+                                <tr>
+                                    <th>Room No</th>
+                                    <th>Image</th>
+                                    <th>Room Category</th>
+                                    <th>Bed Category</th>
+                                    <th>Room Stock</th>
+                                    <th>Food Category</th>
+                                    <th>Room Price</th>
+                                    <th>Total Amount</th>
+                                </tr>
+                                <tr>
+                                    <td>{{invoice.booking.room.room_no}}</td>
+                                    <td><img src="/media/{{invoice.booking.room.roomimage.first.image}}"style="height: 70px; width: 70px; border-radius: 10px";>
+                                        <td>{{invoice.booking.room.room_categories}}</td>
+                                        <td>{{invoice.booking.room.bed_categories}}</td>
+                                        <td>{{invoice.booking.room.room_stock}}</td>
+                                        <td>{{invoice.booking.room.food_categgories}}</td>
+                                        <td>{{invoice.booking.room.room_price}}</td>
+                                        <td>{{invoice.total_amount}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <a href="{% url 'hotel:generatepdf' invoice.pk %}"><button type="submit" class="btn btn-info">Download Invoice</button></a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>                                    
+{% endblock %}

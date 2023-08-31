@@ -1,0 +1,108 @@
+{% extends 'hotel/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block title %} Book Room Page {% endblock %}
+{% block content %}
+{% comment %} <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> {% endcomment %}
+<div class="back_re">
+    <div class="container mt-5">
+       <div class="row">
+          <div class="col-md-12">
+             <div class="title">
+                <h2>Booking Form</h2>
+             </div>
+          </div>
+       </div>
+    </div>
+ </div>
+<section class="site-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <h2 class="mb-5 mt-5">Reservation Form</h2>
+              <form action="" method="post"> {% csrf_token %}
+                
+                <div class="row">
+                  <div class="col-md-6 form-group">
+                    <label for="id_check_in" class="form-label">Check In</label>
+                        <input type="text" name="check_in" value="{{check_in}}">
+                  </div>
+
+                    <div class="col-md-6 form-group">
+                      <label for="id_check_out" class="form-label">Check Out</label>
+                      <input type="text" name="check_out" value="{{check_out}}">
+                    </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6 form-group">
+                    <label for="id_total_days" class="form-label">Total Days</label>
+                        <input type="text" name="total_days" value="{{total_days}}">
+                  </div>
+
+                  <div class="col-md-6 form-group">
+                    <label for="id_total_members" class="form-label">Total Members</label>
+                    <input type="text" name="total_members" value="{{total_members}}">
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6 form-group">
+                    <label for="id_o_of_room" class="form-label">No Of Room</label>
+                        <input type="text" name="no_of_room" value="{{no_of_room}}">
+                  </div>
+                </div>
+                
+                <div class="row">
+                  <div class="col-md-6 form-group">
+                    <input type="submit" value="Book Now" class="btn btn-primary">
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-5">
+              <h3 class="mb-5 mt-5">Featured Room</h3>
+              <div class="media d-block room mb-0">
+            <figure>
+              <img src="/media/{{room_image.first.image}}" alt="Generic placeholder image" class="img-fluid">
+              <div class="overlap-text">
+                <span>
+                  Featured Room 
+                  <span class="ion-ios-star"></span>
+                  <span class="ion-ios-star"></span>
+                  <span class="ion-ios-star"></span>
+                </span>
+              </div>
+            </figure>
+            <div class="media-body">
+              <h3 class="mt-0">Room Category: {{room_data.room_categories}}</h3>
+            </div>
+          </div>
+            </div>
+      </div>
+    </div>
+  </section>
+  
+  {% comment %} <script>
+    var dates = {{disable_date|safe}};
+    alert(dates)
+
+    function disableDates(date) {
+      var string = jQuery.datepicker.formatDate('dd/mm/yy', dates);
+      return [dates.indexOf(string) == -1];
+    }
+
+    $("#id_check_in").datepicker({
+      minDate: new Date(),
+      beforeShowDay: disableDates
+    });
+
+    $("#id_check_out").datepicker({
+      minDate: new Date(),
+      beforeShowDay: disableDates
+    }); 
+  </script> {% endcomment %}
+{% endblock %}

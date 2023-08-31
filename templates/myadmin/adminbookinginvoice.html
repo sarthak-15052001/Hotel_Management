@@ -1,0 +1,85 @@
+{% extends 'myadmin/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+<div class="page-wrapper">
+    <div class="content container-fluid">
+        <div class="page-header">
+            <div class="row align-items-center">
+                <div class="col">
+                    <div class="mt-5">
+                        <h4 class="card-title float-left mt-2">Booking Invoice Details</h4></div> <form class="form-inline my-2 my-lg-0" method="GET">
+                            <div class="col-4 text-right">
+                                <input class="form-control mr-sm-2" type="text" name="search" placeholder="Search" aria-label="Search">
+                                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                        </form>
+                        </div>
+
+                </div>
+            </div>
+        </div>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card card-table">
+            <div class="card-body booking_card">
+                <div class="table-responsive">
+                    <table class="datatable table table-stripped table table-hover table-center mb-1">
+                        <thead class="table-primary">
+                            <tr>
+                                <th>Invoice Number</th>
+                                <th>Created On</th>
+                                <th>Booking Id</th>
+                                <th>Customer Name</th>
+                                <th>Email</th>
+                                <th>Contact</th>
+                                <th>Check In</th>
+                                <th>Check Out</th>
+                                <th>Booking Status</th>
+                                <th>Total Days</th>
+                                <th>Total Members</th>
+                                <th>No Of Rooms</th>
+                                <th>Room No</th>
+                                <th>Image</th>
+                                <th>Room Category</th>
+                                <th>Bed Category</th>
+                                <th>Room Stock</th>
+                                <th>Food Category</th>
+                                <th>Room Price</th>
+                                <th>Total Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for payment in object_list %}
+                            <tr>
+                                <td>{{payment.order_id}}</td>
+                                <td>{{payment.made_on}}</td>
+                                <td>{{payment.booking.id}}
+                                <td>{{payment.user.first_name}} {{payment.user.last_name}}</td>
+                                <td>{{payment.user.email}}</td>
+                                <td>{{payment.user.phone_no}}</td>
+                                <td>{{payment.booking.check_in}}</td>
+                                <td>{{payment.booking.check_out}}</td>
+                                <td>{{payment.booking.booking_status}}</td>
+                                <td>{{payment.booking.total_days}}</td>
+                                <td>{{payment.booking.total_members}}</td>
+                                <td>{{payment.booking.no_of_room}}</td>
+                                <td>{{payment.booking.room.room_no}}</td>
+                                <td><img src="/media/{{payment.booking.room.roomimage.first.image}}"style="height: 70px; width: 70px; border-radius: 10px";></td>
+                                <td>{{payment.booking.room.room_categories}}</td>
+                                <td>{{payment.booking.room.bed_categories}}</td>
+                                <td>{{payment.booking.room.room_stock}}</td>
+                                <td>{{payment.booking.room.food_categgories}}</td>
+                                <td>{{payment.booking.room.room_price}}</td>
+                                <td>{{payment.total_amount}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+{% endblock %}

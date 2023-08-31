@@ -1,0 +1,152 @@
+{% extends 'hotel/base.html' %}
+{% load static %}
+{% block title %} Profile {% endblock %}
+{% block content %}
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+<div class="back_re">
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="title">
+                    <h2>Customer Profile Detail</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container emp-profile">
+    <form method="POST" action="" enctype="multipart/form-data"> {% csrf_token %}
+        <div class="row">
+            <div class="col-md-4 mt-5">
+                <div class="profile-img mt-5">
+                </div>
+            </div>
+            <div class="col-md-2 mt-5">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+            </div>
+            <div class="col-md-8">
+                <div class="tab-content profile-tab" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <img src="/media/{{user.image}}"
+                                    style="height: 150px; width: 150px; border-radius: 10px;"/>
+                            </div>
+                            <div class="col-md-6">
+                                <a href="{% url 'hotel:updateprofile' user.id %}"><button type="button" class="btn btn-success mt-4">Edit</button></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>User Name</label>
+                        </div>
+                        <div class="col-md-6">
+                            <p>{{user.username}}</p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Name</label>
+                        </div>
+                        <div class="col-md-6">
+                            <p>{{user.first_name}} {{user.last_name}}</p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Email</label>
+                        </div>
+                        <div class="col-md-6">
+                            <p>{{user.email}}</p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Gender</label>
+                        </div>
+                        <div class="col-md-6">
+                            <p>{{user.gender}}</p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Mobile</label>
+                        </div>
+                        <div class="col-md-6">
+                            <p>{{user.phone_no}}</p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Birth Date</label>
+                        </div>
+                        <div class="col-md-6">
+                            <p>{{user.birth_date}}</p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Address</label>
+                        </div>
+                        <div class="col-md-6">
+                            <p>{{user.address}}</p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>City</label>
+                        </div>
+                        <div class="col-md-6">
+                            <p>{{user.city}}</p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>State</label>
+                        </div>
+                        <div class="col-md-6">
+                            <p>{{user.state}}</p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Pin Code</label>
+                        </div>
+                        <div class="col-md-6">
+                            <p>{{user.pin_code}}</p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Country</label>
+                        </div>
+                        <div class="col-md-6">
+                            <p>{{user.country}}</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+</div>
+</div>
+</form>
+</div>
+{% endblock%}

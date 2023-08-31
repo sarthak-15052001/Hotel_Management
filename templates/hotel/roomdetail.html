@@ -1,0 +1,75 @@
+{% extends 'hotel/base.html' %}
+{% load static %}
+{% block title %} Room  Detail {% endblock %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'hotel/css/bootstrap1.css' %}">
+
+<div class="container-fluid my-4">
+    <div id="carouselExampleControls" class="carousel slide" data-rides="carousel">
+        <div class="carousel-inner">
+    {% for img in post %}
+    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+        <img class="d-block w-100" style="height: 600px;" src="/media/{{img.image}}" alt="Slide">
+    </div>
+    {% endfor %}
+</div>
+<a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+</a>
+
+<a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+</a>
+</div>
+
+    {% comment %} <div class="col-lg-6 col-sm-6"><br><br>
+        <div id="carouselExampleslideonly" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img class="d-block w-100" src="/media/{{img.image}}" style="height:350px; width:700px; border-radius: 10px";>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %} {% endcomment %}
+        {% comment %} <img class="img-responsive" src="/media/{{room.roomimage.first.image}}"style="height: 350px; width: 700px; border-radius: 10px";>
+    </div> {% endcomment %}
+    <div class="col-lg-12 col-sm-12 mt-12">
+        <div class="card card-table mt-5">
+            <div class="card-body booking_card">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-center mb-5 ">
+            <thead>
+                <tr>
+                    <th>Room No</th>
+                    <th>Room Category</th>
+                    <th>Bed Category</th>
+                    <th>Room Stock</th>
+                    <th>Food Category </th>
+                    <th>No Of Rooms</th>
+                    <th>Room Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{room.room_no}}</td>
+                    <td>{{room.room_categories}}</td>
+                    <td>{{room.bed_categories}}</td>
+                    <td>{{room.room_stock}}</td>
+                    <td>{{room.food_categgories}}</td>
+                    <td>{{no_of_room}}</td>
+                    <td>{{total_room_price}}</td>
+                </tr>                  
+            </tbody>
+        </table>
+        <a href="{% url 'hotel:bookingroom' room.id %}?check_in={{check_in}}&check_out={{check_out}}&total_members={{total_members}}&no_of_room={{no_of_room}}"><button type="submit" class="btn btn-info">Continue Booking</button></a>
+    </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+{% endblock %}

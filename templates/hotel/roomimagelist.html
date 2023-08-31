@@ -1,0 +1,52 @@
+{% extends 'hotel/base.html' %}
+{% load static %}
+{% block title %} Room Image List {% endblock %}
+{% block content %}
+<div class="back_re">
+   <div class="container mt-5">
+      <div class="row">
+         <div class="col-md-12">
+            <div class="title">
+               <h2>List Of Available Rooms</h2> 
+               <form method="GET" action="">
+                  Check-In :<input type="date" autocapitalize="none" placeholder="Search" class="bg-transparen w-full lpl-10 lpy-2 !rounded-lg" name="check_in">
+                  Check-Out :<input type="date" autocapitalize="none" placeholder="Search" class="bg-transparen w-full lpl-10 lpy-2 !rounded-lg" name="check_out">
+                  Total Member :<input type="number" autocapitalize="none" placeholder="Search" style="width: 80px;" class="bg-transparen w-full lpl-10 lpy-2 !rounded-lg" name="total_members"> 
+                  <button type="submit"><i class="fa fa-search"></i></button>
+               </form>
+                  {% comment %} <form class="form-inline my-2 my-lg-0">
+                  <input class="form-control mr-sm-2" name="q" type="search" placeholder="Search" value="{{request.GET.q}}" aria-label="Search">
+                  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form> {% endcomment %}
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+<div  class="our_room">
+    <div class="container">
+       <div class="row">
+          <div class="col-md-12">
+             <div class="titlepage">
+             </div>
+          </div>
+       </div>
+       <div class="row">
+        {% for rooms in available_rooms %}
+          <div class="col-md-4 col-sm-6">
+             <div id="serv_hover"  class="room">
+                <div class="room_img">
+                   <figure><img src="/media/{{rooms.roomimage.last.image}}" alt="#"/></figure>
+                </div>
+                <div class="bed_room">
+                    <box><h3>{{rooms.room_categories}}</h3></box>
+                    <h3>{{rooms.room_stock}}</h3>
+                   <h3>Rs.{{rooms.room_price}}/Night</h3>
+                   <a href="{% url 'hotel:roomdetail' rooms.id %}?check_in={{check_in}}&check_out={{check_out}}&total_members={{total_members}}"><button type="button" class="btn btn-warning">View Details</button></a>
+                </div>
+             </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+{% endblock %}

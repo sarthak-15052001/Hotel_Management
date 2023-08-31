@@ -1,0 +1,150 @@
+{% extends 'myadmin/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+<div class="page-wrapper">
+    <div class="content container-fluid">
+        <div class="page-header mt-5">
+            <div class="row">
+                <div class="col">
+                    <h3 class="page-title">Profile</h3>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'myadmin:myadmin' %}">Dashboard</a></li>
+                        <li class="breadcrumb-item active">Profile</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="profile-header">
+            <div class="row align-items-center">
+                <div class="col-auto profile-image">
+                    <a href="#"> <img class="rounded-circle" alt="User Image" src="/media/{{user.image}}"></a>
+                </div>
+                <div class="col ml-md-n2 profile-user-info">
+                    <h4 class="user-name mb-3">{{user.first_name}} {{user.last_name}}</h4>
+                    <h6 class="text-muted mt-1">Manager</h6>
+                    <div class="user-Location mt-1"><i class="fas fa-map-marker-alt"></i> {{user.city}}, {{user.country}}</div>
+                    <div class="about-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+                </div>
+            </div>
+        </div>
+        <div class="profile-menu">
+        </div>
+        <div class="tab-content profile-tab-cont">
+            <div class="tab-pane fade show active" id="per_details_tab">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title d-flex justify-content-between">
+                                    <span>Personal Details</span>
+                                    <a class="edit-link" data-toggle="modal" href="#edit_personal_details"><i class="fa fa-edit mr-1"></i>Edit</a>
+                                    </h5>
+                                <div class="row mt-5">
+                                    <p class="col-sm-3 text-sm-right mb-0 mb-sm-3">Name</p>
+                                    <p class="col-sm-9">{{user.first_name}} {{user.last_name}}</p>
+                                </div>
+                                <div class="row">
+                                    <p class="col-sm-3 text-sm-right mb-0 mb-sm-3">Date of Birth</p>
+                                    <p class="col-sm-9">{{user.birth_date}}</p>
+                                </div>
+                                <div class="row">
+                                    <p class="col-sm-3 text-sm-right mb-0 mb-sm-3">Email ID </p>
+                                    <p class="col-sm-9"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="caaeabbca3aeaba6bcabb8afb08aafb2aba7baa6afe4a9a5a7">[email&#160;protected]</a></p>
+                                </div>
+                                <div class="row">
+                                    <p class="col-sm-3 text-sm-right mb-0 mb-sm-3">Mobile</p>
+                                    <p class="col-sm-9">{{user.phone_no}}</p>
+                                </div>
+                                <div class="row">
+                                    <p class="col-sm-3 text-sm-right mb-0">Address</p>
+                                    <p class="col-sm-9 mb-0">{{user.address}}
+                                        <br> {{user.city}} - 30007,
+                                        <br> {{user.country}}.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal fade" id="edit_personal_details" aria-hidden="true" role="dialog">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Personal Details</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form method="POSt" action="" enctype="multipart/form-data"> {% csrf_token %}
+                                            <div class="row form-row">
+                                                <div class="col-12 col-sm-6">
+                                                    <div class="form-group">
+                                                        {{form.first_name | as_crispy_field}}
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-6">
+                                                    <div class="form-group">
+                                                        {{form.last_name | as_crispy_field}}
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        {{form.birth_date | as_crispy_field}}
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-6">
+                                                    <div class="form-group">
+                                                        {{form.email | as_crispy_field}}
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-6">
+                                                    <div class="form-group">
+                                                        {{form.phone_no | as_crispy_field}}
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        {{form.address | as_crispy_field}}
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-6">
+                                                    <div class="form-group">
+                                                        {{form.city | as_crispy_field}}
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-6">
+                                                    <div class="form-group">
+                                                        {{form.state | as_crispy_field}}
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-6">
+                                                    <div class="form-group">
+                                                        {{form.pin_code | as_crispy_field}}
+                                                </div>
+                                                <div class="col-12 col-sm-7 ">
+                                                    <div class="form-group">
+                                                        {{form.country | as_crispy_field}}
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-7 ">
+                                                    <div class="form-group">
+                                                        {{form.image | as_crispy_field}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary btn-block">Save Changes</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</div>
+{% endblock %}

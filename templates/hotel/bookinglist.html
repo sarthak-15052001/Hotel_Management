@@ -1,0 +1,112 @@
+{% extends 'hotel/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block title %} Booking List {% endblock %}
+{% block content %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<div class="back_re">
+    <div class="container mt-5">
+       <div class="row">
+          <div class="col-md-12">
+             <div class="title">
+                <h2>Booking List</h2>
+             </div>
+          </div>
+       </div>
+    </div>
+ </div>
+<div class="page-wrapper">
+    <div class="content container-fluid">
+        <div class="page-header">
+            <div class="row align-items-center">
+                <div class="col mt-5">
+            </div>
+        </div>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card card-table">
+            <div class="card-body booking_card">
+                <div class="table-responsive">
+                    <table class="datatable table table-stripped table table-hover table-center mb-1">
+                        <thead class="table-primary">
+                            <tr>
+                                <th>Booking ID</th>
+                                <th>Room Image</th>
+                                <th>Customer Name</th>
+                                <th>Email</th>
+                                <th>Mobile</th>
+                                <th>Date</th>
+                                <th>Room No</th>
+                                <th>Room Categories</th>
+                                <th>Bed Categories</th>
+                                <th>Room Stock</th>
+                                <th>Food Categories</th>
+                                <th>Room Price</th>
+                                <th>Total Amount</th>
+                                <th>Booking  Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for booking in post %}
+                            <tr>
+                                <td>{{booking.id}}</td>
+                                <td><img src="/media/{{booking.room.roomimage.first.image}}"style="height: 70px; width: 70px; border-radius: 10px";></td>
+                                <td>{{booking.user.first_name}} {{booking.user.last_name}}</td>
+                                <td>{{booking.user.email}}</td>
+                                <td>{{booking.user.phone_no}}</td>
+                                <td>{{booking.check_in}}</td>
+                                <td>{{booking.room.room_no}}</td>
+                                <td>{{booking.room.room_categories}}</td>
+                                <td>{{booking.room.bed_categories}}</td>
+                                <td>{{booking.room.room_stock}}</td>
+                                <td>{{booking.room.food_categgories}}</td>
+                                <td>{{booking.room.room_price}}</td>
+                                <td>{{booking.total_amount}}</td>
+                                <td>{{booking.booking_status}}</td>
+                                <td>
+                                    <a href="{% url 'hotel:bookinginvoice' booking.id %}"><button type="submit" class="btn btn-warning">View</button></a>
+                                {% if booking.booking_status == 'CONFIRMED' %}
+                                    <button class="cancel-booking btn btn-danger mr-2" data-booking-id="{{booking.id}}">Cancel</button>
+                                {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+<script>
+    $(document).ready(function() {
+        $(".cancel-booking").click(function () {
+            var $button = $(this);  // Store the reference to the button
+            var booking_id = $button.data('booking-id');
+            $.ajax({
+                url: "{% url 'hotel:bookingcancel' %}",
+                type: "POST",
+                data: {
+                    'csrfmiddlewaretoken': "{{csrf_token}}",
+                    'pk': booking_id
+                },
+                dataType: 'json',
+                success: function (response) {
+                    if(response.status === 'success'){
+                        alert("Booking Cancelled Successfully!");
+                        $button.closest("tr").find(".booking-status").text(response.new_status);
+                    } else {
+                        alert("Error cancelling booking: " + response.message);
+                    }
+                },
+                error: function () {
+                    alert("An error occurred during the request.");
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}

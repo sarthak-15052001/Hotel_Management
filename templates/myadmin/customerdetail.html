@@ -1,0 +1,73 @@
+{% extends 'myadmin/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+<div class="page-wrapper">
+    <div class="content container-fluid">
+        <div class="page-header">
+            <div class="row align-items-center">
+                <div class="col">
+                    <div class="mt-5">
+                        <h4 class="card-title float-left mt-2">Customer Details</h4></div>
+                        <form class="form-inline my-2 my-lg-0" method="GET">
+                            <div class="col-4 text-right">
+                                <input class="form-control mr-sm-2" type="text" name="search" placeholder="Search" aria-label="Search">
+                                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                        </form>
+                        </div>
+                </div>
+            </div>
+        </div>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card card-table">
+            <div class="card-body booking_card">
+                <div class="table-responsive">
+                    <table class="datatable table table-stripped table table-hover table-center mb-1">
+                        <thead class="table-primary">
+                            <tr>
+                                <th>Customer ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Mobile No</th>
+                                <th>Birth Date</th>
+                                <th>Gender</th>
+                                <th>Address</th>
+                                <th>City</th>
+                                <th>State</th>
+                                <th>Country</th>
+                                <th>Pin Code</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for customer in object_list %}
+                            <tr>
+                                <td>{{customer.id}}</td>
+                                <td>{{customer.first_name}} {{customer.last_name}}</td>
+                                <td>{{customer.email}}</td>
+                                <td>{{customer.phone_no}}</td>
+                                <td>{{customer.birth_date}}</td>
+                                <td>{{customer.gender}}</td>
+                                <td>{{customer.address}}</td>
+                                <td>{{customer.city}}</td>
+                                <td>{{customer.state}}</td>
+                                <td>{{customer.country}}</td>
+                                <td>{{customer.pin_code}}</td>
+                                <td>
+                                    <a href="{% url 'myadmin:customerupdate' customer.id %}"><button type="submit" class="btn btn-warning mr-2">Update</button></a>
+                                    <a href="{% url 'myadmin:customerdelete' customer.id %}"><button type="submit" class="btn btn-danger">Delete</button></a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+{% endblock %}
+

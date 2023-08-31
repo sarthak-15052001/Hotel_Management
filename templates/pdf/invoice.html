@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Invoice Generate PDF</title>
+</head>
+<body>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="datatable table table-stripped" style="width:100%">
+                            {% for invoice in payment %}
+                            <tbody>
+                                <tr>
+                                    <b><font size="30"><th>Booking Details</th></b></font>
+                                    </tr>
+                                    <tr>
+                                        <th>Invoice Number:</th>
+                                        <td>{{invoice.order_id}}</td>
+                                        <th>Date:</th>
+                                        <td>{{invoice.made_on}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Booking Id:</th>
+                                        <td>{{invoice.booking.id}}</td>
+                                        <th>Customer Name:</th>
+                                        <td>{{invoice.user.first_name}} {{invoice.user.last_name}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Email:</th>
+                                        <td>{{invoice.user.email}}</td>
+                                        <th>Contact</th>
+                                        <td>{{invoice.user.phone_no}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Check In:</th>
+                                        <td>{{invoice.booking.check_in}}</td>
+                                        <th>Check Out:</th>
+                                        <td>{{invoice.booking.check_out}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Booking Status:</th>
+                                        <td>{{invoice.booking.booking_status}}</td>
+                                        <th>Total Days:</th>
+                                        <td>{{invoice.booking.total_days}}</td>
+                                        <th>Total Amount:</th>
+                                        <td>{{invoice.total_amount}}</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <th>Room Details:</th>
+                                    </tr>
+                                    <tr>
+                                        <th>Room No</th>
+                                        <th>Room Category</th>
+                                        <th>Bed Category</th>
+                                        <th>Room Stock</th>
+                                        <th>Food Category</th>
+                                        <th>Room Price</th>
+                                        <th>Total Amount</th>
+                                    </tr>
+                                    <tr>
+                                        <td>{{invoice.booking.room.room_no}}</td>
+                                            <td>{{invoice.booking.room.room_categories}}</td>
+                                            <td>{{invoice.booking.room.bed_categories}}</td>
+                                            <td>{{invoice.booking.room.room_stock}}</td>
+                                            <td>{{invoice.booking.room.food_categgories}}</td>
+                                            <td>{{invoice.booking.room.room_price}}</td>
+                                            <td>{{invoice.total_amount}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>                         
+</body>
+</html>

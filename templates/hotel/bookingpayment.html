@@ -1,0 +1,62 @@
+{% extends 'hotel/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block title %} Payment Page {% endblock %}
+{% block content %}
+<style>
+    .gradient-custom {
+        background: radial-gradient(50% 123.47% at 50% 50%, #00ff94 0%, #720059 100%),
+          linear-gradient(121.28deg, #669600 0%, #ff0000 100%),
+          linear-gradient(360deg, #0029ff 0%, #8fff00 100%),
+          radial-gradient(100% 164.72% at 100% 100%, #6100ff 0%, #00ff57 100%),
+          radial-gradient(100% 148.07% at 0% 0%, #fff500 0%, #51d500 100%);
+        background-blend-mode: screen, color-dodge, overlay, difference, normal;
+      }
+    </style>
+    <div class="back_re">
+        <div class="container mt-5">
+           <div class="row">
+              <div class="col-md-12">
+                 <div class="title">
+                    <h2>Payment Form</h2>
+                 </div>
+              </div>
+           </div>
+        </div>
+     </div>
+     {% comment %} {% if messages %}
+     <ul class="messages" style="color: red";>
+        {% for message in messages %}
+          <b><li{% if message.tags %} class="{{message.tags}}" {% endif %}>{{message}}</li></b>
+        {% endfor %}
+    </ul>
+    {% endif %} {% endcomment %}
+<section class="gradient-custom">
+    <div class="container my-5 py-5">
+      <div class="row d-flex justify-content-center py-5">
+        <div class="col-md-7 col-lg-5 col-xl-4">
+          <div class="card" style="border-radius: 15px;">
+            <div class="card-body p-4">
+              <form method="POST" action=""> {% csrf_token %}
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <div class="form-outline">
+                    {{form.payemnt_type | as_crispy_field}}
+                  </div>
+                 
+                </div>
+  
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                  <div class="form-outline">
+                    {{form.total_amount | as_crispy_field}}
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-info">Confirm Payment</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}
