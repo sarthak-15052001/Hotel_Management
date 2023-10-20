@@ -22,5 +22,8 @@ Description:- -> This project contains two dashboard one is for hotel and second
 
 # This is the video of this project.
 
-https://github.com/sarthak-15052001/Hotel_Management/assets/135957525/f42c0ac7-5b8d-412b-a280-0464c0160650
+
+https://github.com/sarthak-15052001/Hotel_Management/assets/135957525/69da1853-6480-44bb-8a9f-7a072b2ba68f
+
+
 
